@@ -1,17 +1,68 @@
+'use client';
+
+import React, { useState } from 'react';
+import { CartProvider } from '@/context/CartContext';
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import CategoriesSection from '@/components/CategoriesSection';
+import ProductCatalog from '@/components/ProductCatalog';
+import HeritageSection from '@/components/HeritageSection';
+import FestiveGifting from '@/components/FestiveGifting';
+import PurityPromise from '@/components/PurityPromise';
+import Testimonials from '@/components/Testimonials';
+import FAQSection from '@/components/FAQSection';
+import Footer from '@/components/Footer';
+import CartDrawer from '@/components/CartDrawer';
+import Toast from '@/components/Toast';
+
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-cream text-dark-brown">
-      <div className="text-center max-w-xl">
-        <h1 className="text-4xl font-bold tracking-tight text-dark-brown sm:text-6xl mb-4">
-          Modern <span className="text-saffron">Sweets</span>
-        </h1>
-        <p className="text-lg text-dark-brown/80 mb-6 font-medium">
-          Taste & Purity Since 1985
-        </p>
-        <div className="inline-block px-4 py-2 bg-saffron text-white rounded-full font-semibold shadow-md">
-          Project Initialized Successfully
-        </div>
+    <CartProvider>
+      <div className="min-h-screen flex flex-col bg-cream text-dark-brown selection:bg-saffron selection:text-white">
+        {/* Navigation Bar */}
+        <Navbar />
+
+        {/* Main Content Sections */}
+        <main className="flex-1">
+          {/* Hero Section */}
+          <Hero />
+
+          {/* Categories Section */}
+          <CategoriesSection onSelectCategory={setSelectedCategory} />
+
+          {/* Full Interactive Product Catalog */}
+          <ProductCatalog
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+
+          {/* 40-Year Heritage & Story */}
+          <HeritageSection />
+
+          {/* Royal Festive & Corporate Gifting Section */}
+          <FestiveGifting />
+
+          {/* Purity & Hygiene Promise */}
+          <PurityPromise />
+
+          {/* Customer Reviews & Social Proof */}
+          <Testimonials />
+
+          {/* FAQs Accordion */}
+          <FAQSection />
+        </main>
+
+        {/* Footer */}
+        <Footer />
+
+        {/* Slide-out Cart Drawer */}
+        <CartDrawer />
+
+        {/* Notification Toast */}
+        <Toast />
       </div>
-    </main>
+    </CartProvider>
   );
 }
