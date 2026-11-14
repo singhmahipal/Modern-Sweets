@@ -2,9 +2,10 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { Star, ShoppingBag, Eye, Search, Filter, Sparkles, Check } from 'lucide-react';
+import { Star, ShoppingBag, Eye, Search, Filter, Sparkles, Check, Heart } from 'lucide-react';
 import { PRODUCTS, SweetProduct } from '@/data/sweetsData';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import QuickViewModal from './QuickViewModal';
 
 interface ProductCatalogProps {
@@ -17,6 +18,7 @@ export default function ProductCatalog({
   onSelectCategory,
 }: ProductCatalogProps) {
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
   const [quickViewProduct, setQuickViewProduct] = useState<SweetProduct | null>(null);
@@ -168,9 +170,25 @@ export default function ProductCatalog({
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
 
-                    {/* Veg Symbol (Green Dot inside Square) */}
-                    <div className="absolute top-3 left-3 w-5 h-5 bg-white rounded border border-emerald-600 flex items-center justify-center shadow-sm">
-                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
+                    {/* Veg Symbol & Wishlist */}
+                    <div className="absolute top-3 left-3 flex items-center gap-2 z-10">
+                      <div className="w-5 h-5 bg-white rounded border border-emerald-600 flex items-center justify-center shadow-sm">
+                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleWishlist(product);
+                        }}
+                        className={`w-7 h-7 rounded-full flex items-center justify-center transition-all backdrop-blur-md shadow-sm ${
+                          isInWishlist(product.id)
+                            ? 'bg-red-500 text-white'
+                            : 'bg-white/80 hover:bg-white text-dark-brown/70 hover:text-red-500'
+                        }`}
+                        title={isInWishlist(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                      >
+                        <Heart className={`w-3.5 h-3.5 ${isInWishlist(product.id) ? 'fill-white' : ''}`} />
+                      </button>
                     </div>
 
                     {/* Top Badges */}
