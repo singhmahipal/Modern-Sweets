@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Phone,
   Mail,
@@ -119,6 +120,14 @@ export default function Footer() {
                 >
                   Festive Gift Hampers
                 </a>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="hover:text-saffron transition-colors font-semibold text-gold-light"
+                >
+                  Our Story & Heritage (Since 1985) →
+                </Link>
               </li>
             </ul>
           </div>

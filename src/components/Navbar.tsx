@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ShoppingBag, Phone, Menu, X, Sparkles, MessageCircle, Heart, Truck, Gift } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
@@ -21,13 +22,14 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: 'Sweets & Savories', href: '#products' },
-    { label: 'Categories', href: '#categories' },
-    { label: 'Custom Box Studio', href: '#custom-builder' },
-    { label: 'Festive Hampers', href: '#festive-gifting' },
-    { label: 'Our Legacy', href: '#legacy' },
-    { label: 'Purity Promise', href: '#purity' },
-    { label: 'Customer Reviews', href: '#reviews' },
+    { label: 'Sweets & Savories', href: '/#products' },
+    { label: 'Categories', href: '/#categories' },
+    { label: 'Custom Box Studio', href: '/#custom-builder' },
+    { label: 'Festive Hampers', href: '/#festive-gifting' },
+    { label: 'Our Story', href: '/about' },
+    { label: 'Our Legacy', href: '/#legacy' },
+    { label: 'Purity Promise', href: '/#purity' },
+    { label: 'Customer Reviews', href: '/#reviews' },
   ];
 
   return (
@@ -73,7 +75,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-gold shadow-sm bg-white p-0.5 group-hover:scale-105 transition-transform">
               <Image
                 src="/images/logo.png"
@@ -92,7 +94,7 @@ export default function Navbar() {
                 Taste & Purity Since 1985
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Nav Links */}
           <div className="hidden xl:flex items-center gap-6">
