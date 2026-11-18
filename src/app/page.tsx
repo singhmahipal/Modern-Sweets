@@ -13,6 +13,7 @@ import CustomBoxBuilder from '@/components/CustomBoxBuilder';
 import HeritageSection from '@/components/HeritageSection';
 import StatsSection from '@/components/StatsSection';
 import FestiveGifting from '@/components/FestiveGifting';
+import FestiveCalendar from '@/components/FestiveCalendar';
 import PurityPromise from '@/components/PurityPromise';
 import PincodeEstimator from '@/components/PincodeEstimator';
 import Testimonials from '@/components/Testimonials';
@@ -66,6 +67,9 @@ export default function Home() {
 
             {/* Royal Festive & Corporate Gifting */}
             <FestiveGifting />
+
+            {/* ✨ Day 5: Traditional Sweets Across the 6 Indian Seasons */}
+            <FestiveCalendar />
 
             {/* Purity & Hygiene Promise */}
             <PurityPromise />

@@ -123,6 +123,22 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/gifting"
+                  className="hover:text-saffron transition-colors"
+                >
+                  Corporate & Wedding Gifting
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/stores"
+                  className="hover:text-saffron transition-colors"
+                >
+                  Find Our 5 Stores & Lounges
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/about"
                   className="hover:text-saffron transition-colors font-semibold text-gold-light"
                 >

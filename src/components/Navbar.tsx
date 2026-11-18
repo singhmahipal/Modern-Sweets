@@ -3,15 +3,17 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShoppingBag, Phone, Menu, X, Sparkles, MessageCircle, Heart, Truck, Gift } from 'lucide-react';
+import { ShoppingBag, Phone, Menu, X, Sparkles, MessageCircle, Heart, Truck, Gift, Compass } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
+import MithaiRecommenderModal from './MithaiRecommenderModal';
 
 export default function Navbar() {
   const { totalItems, setIsCartOpen, setIsOrderTrackerOpen } = useCart();
   const { wishlistCount, setIsWishlistOpen } = useWishlist();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,10 +27,9 @@ export default function Navbar() {
     { label: 'Sweets & Savories', href: '/#products' },
     { label: 'Categories', href: '/#categories' },
     { label: 'Custom Box Studio', href: '/#custom-builder' },
-    { label: 'Festive Hampers', href: '/#festive-gifting' },
+    { label: 'Corporate & Wedding Gifting', href: '/gifting' },
+    { label: 'Our Stores', href: '/stores' },
     { label: 'Our Story', href: '/about' },
-    { label: 'Our Legacy', href: '/#legacy' },
-    { label: 'Purity Promise', href: '/#purity' },
     { label: 'Customer Reviews', href: '/#reviews' },
   ];
 
@@ -110,7 +111,17 @@ export default function Navbar() {
           </div>
 
           {/* Right Action Icons & CTA */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Sweet Quiz Button */}
+            <button
+              onClick={() => setIsQuizOpen(true)}
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-saffron/10 hover:bg-saffron text-dark-brown hover:text-white border border-saffron/30 text-xs font-bold transition-all shadow-sm"
+              title="Find Your Perfect Sweet"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-saffron" />
+              <span>Sweet Quiz</span>
+            </button>
+
             {/* Wishlist Button */}
             <button
               onClick={() => setIsWishlistOpen(true)}
@@ -179,6 +190,16 @@ export default function Navbar() {
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
+                    setIsQuizOpen(true);
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-saffron/15 text-dark-brown border border-saffron/30"
+                >
+                  <Sparkles className="w-4 h-4 text-saffron" />
+                  <span>Find Your Sweet Match (Quiz)</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
                     setIsOrderTrackerOpen(true);
                   }}
                   className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-cream border border-gold/40 text-dark-brown"
@@ -210,6 +231,12 @@ export default function Navbar() {
           </div>
         )}
       </nav>
+
+      {/* Sweet Sommelier Recommender Modal */}
+      <MithaiRecommenderModal
+        isOpen={isQuizOpen}
+        onClose={() => setIsQuizOpen(false)}
+      />
     </header>
   );
 }

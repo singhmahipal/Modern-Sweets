@@ -1,13 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Search, CheckCircle2, Clock, Truck, ShieldCheck, Heart, Package } from 'lucide-react';
+import { X, Search, CheckCircle2, Clock, Truck, ShieldCheck, Heart, Package, FileText } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import InvoiceModal from './InvoiceModal';
 
 export default function OrderTrackerModal() {
   const { isOrderTrackerOpen, setIsOrderTrackerOpen, activeOrderId, orders } = useCart();
   const [searchId, setSearchId] = useState(activeOrderId || '');
   const [searchedOrder, setSearchedOrder] = useState<any | null>(null);
+  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
 
   if (!isOrderTrackerOpen) return null;
 
@@ -141,12 +143,74 @@ export default function OrderTrackerModal() {
             </div>
           </div>
 
+          <div className="flex items-center justify-between p-3.5 rounded-2xl bg-white border border-gold/30">
+            <div className="flex items-center gap-2 text-xs font-bold text-dark-brown">
+              <FileText className="w-4 h-4 text-saffron" />
+              <span>Need Tax Receipt for Accounts?</span>
+            </div>
+            <button
+              onClick={() => setIsInvoiceOpen(true)}
+              className="px-3.5 py-1.5 rounded-xl bg-dark-brown hover:bg-black text-gold-light text-xs font-bold"
+            >
+              View Official GST Invoice
+            </button>
+          </div>
+
           <div className="p-3.5 rounded-2xl bg-cream border border-gold/30 text-xs text-dark-brown/80 flex items-center gap-2.5">
             <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
             <span>
               <strong>Purity Guarantee:</strong> Prepared with certified 100% cow desi ghee and zero preservatives. Vacuum-sealed to preserve crispness and aroma.
             </span>
           </div>
+
+          <InvoiceModal
+            order={
+              searchedOrder || {
+                orderId: searchId || 'MS-89241',
+                date: 'Today, 8:30 AM',
+                status: 'Received',
+                subtotal: 1240,
+                discount: 0,
+                shipping: 0,
+                total: 1240,
+                deliverySlot: 'Morning Fresh Batch (8:00 AM - 12:00 PM)',
+                paymentMethod: 'UPI',
+                customer: {
+                  name: 'Valued Customer',
+                  phone: '+91 98765 43210',
+                  email: 'customer@example.com',
+                  address: 'Connaught Place, Central Delhi',
+                  city: 'New Delhi',
+                  pincode: '110001',
+                },
+                items: [
+                  {
+                    id: 'sw-1',
+                    product: {
+                      id: 'sw-1',
+                      name: 'Shahi Kaju Katli',
+                      hindiName: 'शाही काजू कतली',
+                      category: 'dry-fruit',
+                      categoryLabel: 'Royal Dry Fruit',
+                      price: 480,
+                      weightOptions: [{ label: '500g', multiplier: 1 }],
+                      rating: 4.9,
+                      reviewsCount: 1420,
+                      image: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=800&q=80',
+                      description: 'Diamond-shaped delicate cashew fudge',
+                      ingredients: ['Cashews', 'Sugar', 'Silver leaf'],
+                      shelfLife: '25 Days',
+                    },
+                    weightOption: '500g',
+                    quantity: 2,
+                    unitPrice: 480,
+                  },
+                ],
+              }
+            }
+            isOpen={isInvoiceOpen}
+            onClose={() => setIsInvoiceOpen(false)}
+          />
         </div>
 
       </div>

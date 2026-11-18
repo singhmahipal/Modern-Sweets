@@ -15,8 +15,10 @@ import {
   Clock,
   ShieldCheck,
   MessageCircle,
+  FileText,
 } from 'lucide-react';
 import { useCart, PlacedOrder } from '@/context/CartContext';
+import InvoiceModal from './InvoiceModal';
 
 export default function CheckoutModal() {
   const {
@@ -53,6 +55,7 @@ export default function CheckoutModal() {
 
   // Placed Order state
   const [confirmedOrder, setConfirmedOrder] = useState<PlacedOrder | null>(null);
+  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
 
   if (!isCheckoutOpen) return null;
 
@@ -484,6 +487,13 @@ export default function CheckoutModal() {
                 >
                   Track Order Timeline
                 </button>
+                <button
+                  onClick={() => setIsInvoiceOpen(true)}
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-dark-brown hover:bg-black text-gold-light font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all"
+                >
+                  <FileText className="w-4 h-4 text-saffron" />
+                  <span>GST Tax Invoice</span>
+                </button>
                 <a
                   href={`https://wa.me/919876543210?text=Namaste!%20I%20have%20placed%20order%20*${confirmedOrder.orderId}*%20for%20₹${confirmedOrder.total}.%20Please%20confirm%20dispatch.`}
                   target="_blank"
@@ -494,6 +504,13 @@ export default function CheckoutModal() {
                   <span>WhatsApp Receipt</span>
                 </a>
               </div>
+
+              {/* Invoice Modal */}
+              <InvoiceModal
+                order={confirmedOrder}
+                isOpen={isInvoiceOpen}
+                onClose={() => setIsInvoiceOpen(false)}
+              />
             </div>
           )}
         </div>
