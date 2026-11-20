@@ -123,10 +123,26 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/subscriptions"
+                  className="hover:text-saffron transition-colors"
+                >
+                  Shahi Mithai Subscriptions
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/gifting"
                   className="hover:text-saffron transition-colors"
                 >
                   Corporate & Wedding Gifting
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/journal"
+                  className="hover:text-saffron transition-colors"
+                >
+                  Halwai Culinary Journal
                 </Link>
               </li>
               <li>
@@ -136,6 +152,14 @@ export default function Footer() {
                 >
                   Find Our 5 Stores & Lounges
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="/#care-guide"
+                  className="hover:text-saffron transition-colors"
+                >
+                  Sweet Storage & Reheating Guide
+                </a>
               </li>
               <li>
                 <Link

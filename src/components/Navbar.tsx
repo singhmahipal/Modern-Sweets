@@ -7,6 +7,7 @@ import { ShoppingBag, Phone, Menu, X, Sparkles, MessageCircle, Heart, Truck, Gif
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import MithaiRecommenderModal from './MithaiRecommenderModal';
+import GiftCardModal from './GiftCardModal';
 
 export default function Navbar() {
   const { totalItems, setIsCartOpen, setIsOrderTrackerOpen } = useCart();
@@ -14,6 +15,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,12 +27,12 @@ export default function Navbar() {
 
   const navLinks = [
     { label: 'Sweets & Savories', href: '/#products' },
-    { label: 'Categories', href: '/#categories' },
     { label: 'Custom Box Studio', href: '/#custom-builder' },
+    { label: 'Shahi Subscriptions', href: '/subscriptions' },
     { label: 'Corporate & Wedding Gifting', href: '/gifting' },
+    { label: 'Halwai Journal', href: '/journal' },
     { label: 'Our Stores', href: '/stores' },
     { label: 'Our Story', href: '/about' },
-    { label: 'Customer Reviews', href: '/#reviews' },
   ];
 
   return (
@@ -115,11 +117,21 @@ export default function Navbar() {
             {/* Sweet Quiz Button */}
             <button
               onClick={() => setIsQuizOpen(true)}
-              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-saffron/10 hover:bg-saffron text-dark-brown hover:text-white border border-saffron/30 text-xs font-bold transition-all shadow-sm"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-saffron/10 hover:bg-saffron text-dark-brown hover:text-white border border-saffron/30 text-xs font-bold transition-all shadow-sm"
               title="Find Your Perfect Sweet"
             >
               <Sparkles className="w-3.5 h-3.5 text-saffron" />
               <span>Sweet Quiz</span>
+            </button>
+
+            {/* E-Gift Card Button */}
+            <button
+              onClick={() => setIsGiftCardOpen(true)}
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream hover:bg-gold/20 text-dark-brown border border-gold/40 text-xs font-bold transition-all shadow-sm"
+              title="Buy Digital Mithai Gift Voucher"
+            >
+              <Gift className="w-3.5 h-3.5 text-gold-dark" />
+              <span>E-Gift Card</span>
             </button>
 
             {/* Wishlist Button */}
@@ -200,6 +212,16 @@ export default function Navbar() {
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
+                    setIsGiftCardOpen(true);
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-cream border border-gold/40 text-dark-brown"
+                >
+                  <Gift className="w-4 h-4 text-gold-dark" />
+                  <span>Send Digital E-Gift Card</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
                     setIsOrderTrackerOpen(true);
                   }}
                   className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-cream border border-gold/40 text-dark-brown"
@@ -236,6 +258,12 @@ export default function Navbar() {
       <MithaiRecommenderModal
         isOpen={isQuizOpen}
         onClose={() => setIsQuizOpen(false)}
+      />
+
+      {/* Digital E-Gift Card Studio Modal */}
+      <GiftCardModal
+        isOpen={isGiftCardOpen}
+        onClose={() => setIsGiftCardOpen(false)}
       />
     </header>
   );

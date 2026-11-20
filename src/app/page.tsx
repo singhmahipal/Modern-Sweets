@@ -15,6 +15,7 @@ import StatsSection from '@/components/StatsSection';
 import FestiveGifting from '@/components/FestiveGifting';
 import FestiveCalendar from '@/components/FestiveCalendar';
 import PurityPromise from '@/components/PurityPromise';
+import SweetCareGuide from '@/components/SweetCareGuide';
 import PincodeEstimator from '@/components/PincodeEstimator';
 import Testimonials from '@/components/Testimonials';
 import FAQSection from '@/components/FAQSection';
@@ -73,6 +74,9 @@ export default function Home() {
 
             {/* Purity & Hygiene Promise */}
             <PurityPromise />
+
+            {/* ✨ Day 6: Master Halwai Sweet Care, Storage & Reheating Guide */}
+            <SweetCareGuide />
 
             {/* Pincode Delivery Estimator */}
             <section className="py-12 bg-cream">
