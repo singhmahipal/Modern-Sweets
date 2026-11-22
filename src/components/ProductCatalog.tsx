@@ -2,11 +2,12 @@
 
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
-import { Star, ShoppingBag, Eye, Search, Filter, Sparkles, Check, Heart } from 'lucide-react';
+import { Star, ShoppingBag, Eye, Search, Filter, Sparkles, Check, Heart, ShieldCheck } from 'lucide-react';
 import { PRODUCTS, SweetProduct } from '@/data/sweetsData';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import QuickViewModal from './QuickViewModal';
+import NutritionalMatrixModal from './NutritionalMatrixModal';
 
 interface ProductCatalogProps {
   selectedCategory: string;
@@ -22,6 +23,7 @@ export default function ProductCatalog({
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
   const [quickViewProduct, setQuickViewProduct] = useState<SweetProduct | null>(null);
+  const [isNutritionOpen, setIsNutritionOpen] = useState(false);
 
   // Maintain selected weight per product in state
   const [selectedWeights, setSelectedWeights] = useState<Record<string, string>>({});
@@ -113,6 +115,15 @@ export default function ProductCatalog({
                 <option value="price-desc">Sort: Price (High to Low)</option>
               </select>
             </div>
+
+            <button
+              onClick={() => setIsNutritionOpen(true)}
+              className="px-4 py-2.5 rounded-full bg-cream hover:bg-gold/20 text-dark-brown border border-gold/40 text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all"
+              title="View Calories & Allergens"
+            >
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span>Nutrition & Allergens</span>
+            </button>
           </div>
         </div>
 
@@ -296,6 +307,12 @@ export default function ProductCatalog({
         <QuickViewModal
           product={quickViewProduct}
           onClose={() => setQuickViewProduct(null)}
+        />
+
+        {/* Nutritional Intelligence & Allergen Matrix Modal */}
+        <NutritionalMatrixModal
+          isOpen={isNutritionOpen}
+          onClose={() => setIsNutritionOpen(false)}
         />
 
       </div>

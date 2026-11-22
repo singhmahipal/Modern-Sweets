@@ -169,6 +169,14 @@ export default function Footer() {
                   Our Story & Heritage (Since 1985) →
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/support"
+                  className="hover:text-saffron transition-colors text-emerald-400 font-semibold"
+                >
+                  Customer Care & 100% Replacement Guarantee →
+                </Link>
+              </li>
             </ul>
           </div>
 

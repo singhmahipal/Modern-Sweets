@@ -8,6 +8,7 @@ import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import MithaiRecommenderModal from './MithaiRecommenderModal';
 import GiftCardModal from './GiftCardModal';
+import ShagunWheelModal from './ShagunWheelModal';
 
 export default function Navbar() {
   const { totalItems, setIsCartOpen, setIsOrderTrackerOpen } = useCart();
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
+  const [isWheelOpen, setIsWheelOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,10 +31,11 @@ export default function Navbar() {
     { label: 'Sweets & Savories', href: '/#products' },
     { label: 'Custom Box Studio', href: '/#custom-builder' },
     { label: 'Shahi Subscriptions', href: '/subscriptions' },
-    { label: 'Corporate & Wedding Gifting', href: '/gifting' },
+    { label: 'Corporate Gifting', href: '/gifting' },
     { label: 'Halwai Journal', href: '/journal' },
     { label: 'Our Stores', href: '/stores' },
     { label: 'Our Story', href: '/about' },
+    { label: 'Customer Care', href: '/support' },
   ];
 
   return (
@@ -46,7 +49,16 @@ export default function Navbar() {
               <strong>Festive Season Special:</strong> Free Express Delivery on orders above ₹999 across India!
             </span>
           </div>
-          <div className="hidden md:flex items-center gap-5 text-cream/90 text-xs">
+          <div className="hidden md:flex items-center gap-4 text-cream/90 text-xs">
+            <button
+              onClick={() => setIsWheelOpen(true)}
+              className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-saffron hover:bg-saffron-dark text-white font-bold transition-all shadow-sm"
+              title="Spin for Shagun Discount"
+            >
+              <Sparkles className="w-3 h-3" />
+              <span>Spin for Shagun</span>
+            </button>
+            <span className="text-gold/40">|</span>
             <button
               onClick={() => setIsOrderTrackerOpen(true)}
               className="flex items-center gap-1.5 hover:text-saffron transition-colors"
@@ -202,6 +214,16 @@ export default function Navbar() {
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
+                    setIsWheelOpen(true);
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-saffron to-gold text-white shadow-sm"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>Spin Shubh Shagun Wheel</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
                     setIsQuizOpen(true);
                   }}
                   className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-saffron/15 text-dark-brown border border-saffron/30"
@@ -264,6 +286,12 @@ export default function Navbar() {
       <GiftCardModal
         isOpen={isGiftCardOpen}
         onClose={() => setIsGiftCardOpen(false)}
+      />
+
+      {/* Shubh Shagun Festive Reward Wheel */}
+      <ShagunWheelModal
+        isOpen={isWheelOpen}
+        onClose={() => setIsWheelOpen(false)}
       />
     </header>
   );

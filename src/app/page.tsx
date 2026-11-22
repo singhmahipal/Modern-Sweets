@@ -11,6 +11,7 @@ import CategoriesSection from '@/components/CategoriesSection';
 import ProductCatalog from '@/components/ProductCatalog';
 import CustomBoxBuilder from '@/components/CustomBoxBuilder';
 import HeritageSection from '@/components/HeritageSection';
+import HalwaiReels from '@/components/HalwaiReels';
 import StatsSection from '@/components/StatsSection';
 import FestiveGifting from '@/components/FestiveGifting';
 import FestiveCalendar from '@/components/FestiveCalendar';
@@ -65,6 +66,9 @@ export default function Home() {
 
             {/* ✨ Day 4: Animated Heritage & Purity Stats Counter */}
             <StatsSection />
+
+            {/* ✨ Day 7: Master Halwai Kitchen Reels */}
+            <HalwaiReels />
 
             {/* Royal Festive & Corporate Gifting */}
             <FestiveGifting />
