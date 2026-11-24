@@ -9,6 +9,8 @@ import { useWishlist } from '@/context/WishlistContext';
 import MithaiRecommenderModal from './MithaiRecommenderModal';
 import GiftCardModal from './GiftCardModal';
 import ShagunWheelModal from './ShagunWheelModal';
+import FestivePreOrderModal from './FestivePreOrderModal';
+import BoxPersonalizerModal from './BoxPersonalizerModal';
 
 export default function Navbar() {
   const { totalItems, setIsCartOpen, setIsOrderTrackerOpen } = useCart();
@@ -18,6 +20,8 @@ export default function Navbar() {
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [isGiftCardOpen, setIsGiftCardOpen] = useState(false);
   const [isWheelOpen, setIsWheelOpen] = useState(false);
+  const [isPreOrderOpen, setIsPreOrderOpen] = useState(false);
+  const [isPersonalizerOpen, setIsPersonalizerOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +54,15 @@ export default function Navbar() {
             </span>
           </div>
           <div className="hidden md:flex items-center gap-4 text-cream/90 text-xs">
+            <button
+              onClick={() => setIsPreOrderOpen(true)}
+              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500 hover:bg-amber-600 text-dark-brown font-bold transition-all shadow-sm"
+              title="Pre-Order Festival Slots"
+            >
+              <Sparkles className="w-3 h-3 text-dark-brown" />
+              <span>Festive Pre-Orders</span>
+            </button>
+            <span className="text-gold/40">|</span>
             <button
               onClick={() => setIsWheelOpen(true)}
               className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-saffron hover:bg-saffron-dark text-white font-bold transition-all shadow-sm"
@@ -126,6 +139,16 @@ export default function Navbar() {
 
           {/* Right Action Icons & CTA */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Monogram Box Studio Button */}
+            <button
+              onClick={() => setIsPersonalizerOpen(true)}
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream hover:bg-gold/20 text-dark-brown border border-gold/40 text-xs font-bold transition-all shadow-sm"
+              title="Customize Gold Foil Monogrammed Box"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-gold-dark" />
+              <span>Bespoke Monogram</span>
+            </button>
+
             {/* Sweet Quiz Button */}
             <button
               onClick={() => setIsQuizOpen(true)}
@@ -292,6 +315,18 @@ export default function Navbar() {
       <ShagunWheelModal
         isOpen={isWheelOpen}
         onClose={() => setIsWheelOpen(false)}
+      />
+
+      {/* Festival Pre-Order Vault Modal */}
+      <FestivePreOrderModal
+        isOpen={isPreOrderOpen}
+        onClose={() => setIsPreOrderOpen(false)}
+      />
+
+      {/* Bespoke Box Monogram Studio Modal */}
+      <BoxPersonalizerModal
+        isOpen={isPersonalizerOpen}
+        onClose={() => setIsPersonalizerOpen(false)}
       />
     </header>
   );

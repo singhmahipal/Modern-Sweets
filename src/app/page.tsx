@@ -17,6 +17,8 @@ import FestiveGifting from '@/components/FestiveGifting';
 import FestiveCalendar from '@/components/FestiveCalendar';
 import PurityPromise from '@/components/PurityPromise';
 import SweetCareGuide from '@/components/SweetCareGuide';
+import MithaiPairings from '@/components/MithaiPairings';
+import LiveBatchTracker from '@/components/LiveBatchTracker';
 import PincodeEstimator from '@/components/PincodeEstimator';
 import Testimonials from '@/components/Testimonials';
 import FAQSection from '@/components/FAQSection';
@@ -58,16 +60,22 @@ export default function Home() {
               onSelectCategory={setSelectedCategory}
             />
 
+            {/* Royal Mithai & Chai Pairings */}
+            <MithaiPairings />
+
             {/* Custom Box Builder Studio */}
             <CustomBoxBuilder />
 
             {/* 40-Year Heritage & Story */}
             <HeritageSection />
 
-            {/* ✨ Day 4: Animated Heritage & Purity Stats Counter */}
+            {/* Animated Heritage & Purity Stats Counter */}
             <StatsSection />
 
-            {/* ✨ Day 7: Master Halwai Kitchen Reels */}
+            {/* Live Kadhai Batch Tracker */}
+            <LiveBatchTracker />
+
+            {/* Master Halwai Kitchen Reels */}
             <HalwaiReels />
 
             {/* Royal Festive & Corporate Gifting */}
